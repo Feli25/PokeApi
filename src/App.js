@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+import Table from './components/pages/Table'
+import Details from './components/pages/Details'
+import Home from './components/pages/Home'
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      // pokemons: {},
+      selected: null
+    }
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Table/>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/poke/:id" component={Details}/>
+          <Route render={() => <h1>404</h1>} />
+        </Switch>
+        
       </div>
     );
   }
